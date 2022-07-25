@@ -1,0 +1,95 @@
+import sys 
+
+""" Execise 4
+    Driver: Betty  Kouadio
+    Navigator : Fabrice  Tedonjeu
+    Sign of by : Mason Drenner
+    This project is about creating a class  name song.
+    The song will contain data pertaining to the artist who performs the song, 
+    the name of the song, the beats per minute, and the notes that are in the song.
+ """
+class  song:
+    """
+        Create a class named song that contain data pertaining to the artist who performs the song,
+        the name of the song, the beats per minute, and the notes that are in the song.
+     """
+    
+    def __init__(self,name,primary_artist,bmp,chords):
+        """Parameters: self, name , artist , bmp, chords, primary  artist
+         This  function set  attributes 
+         """
+        
+        self.name = name
+        self.artist = [primary_artist]
+        self.bmp = bmp
+        self.chords = chords
+        
+              
+    def associated_artists(self,other_artist):
+        """ parameter: self and artist
+            This function append the other_artists parameter to the artists parameter.
+         """
+        self.artist.append(other_artist)
+        
+    def change_beat(self,change=5,increase=True):
+        """ Paramters : self,  change with default that  takes  integer 5 as default  value, and increase with default True
+            This function changes (incrase or decrease) the beat per minute by 5 units
+         """
+        if increase:
+            self.bmp += change
+        else:
+            self.bmp -= change
+            
+    def modulate(self,steps=1):
+        """Parameters: self , steps with  default value 1
+           This function The method should append all new modulated chords to the empty list
+           created earlier and set the chords attribute to this new list of modulated chords. 
+        """
+        list_chromatic_scale = ['C','C#','D','D#','E','F','F#','G','G#','A','A#','B']
+        list_modulate_chords = []
+        
+        for i in range(len(self.chords)):
+            
+            index = steps *2 
+            list_modulate_chords.append(list_chromatic_scale[list_chromatic_scale.index(self.chords[i])+index])
+            self.chords=list_chromatic_scale
+            
+    def info(self):
+        """ Parameter : Self
+            This function  print a message letting the user know the songs name, artists, chords and beats per minute.
+        """
+        
+        print("song name : ", self.name)
+        print("Primary artits name : ", self.artist)
+        print("Beat per minute: ", self.bmp)
+        print("Chords used : ", self.chords)
+        
+if __name__ == "__main__": 
+    
+    #Creation of the  playlist 
+    song =  song("Jealous","Labrinth ", 80, ["D","A","D#","F"])
+    
+    # Displays information about the song
+    print(" Some info about the song  after it creation ")
+    song.info()
+    # Add  other  artists  name 
+    song.associated_artists("PittBull")
+    song.associated_artists("Cardi B")
+    song.associated_artists(" Migos ")
+    song.associated_artists("Adriana Grande ")
+    song.associated_artists(" Celine Dion ")
+    song.associated_artists(" Alicia Keys ")
+    song.associated_artists("Beyonce")
+    print(" Some info about after adding other artist creation ")
+    song.info()
+    
+    #increase the beat of the song
+    song.change_beat()
+    print(" Some info about the song after change of the beat ")
+    song.info()
+    
+    #Change mode of the song
+    song.modulate()
+    print(" Some info about the song after modulation ")
+    song.info()
+    
